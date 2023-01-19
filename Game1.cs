@@ -2,27 +2,37 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Final_project
 {
     public class Game1 : Game
     {
+        Random generator;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        SpriteFont words;
         Texture2D standerd;
         Texture2D left;
         Texture2D right;
         Texture2D astaroid;
         Texture2D space;
         Rectangle standard;
-        Rectangle Leftt;
-        Rectangle Rightt;
         Rectangle asteroid;
+        Rectangle asteroid2;
+        Rectangle asteroid3;
         Rectangle Space;
         Vector2 astaroidspeed;
         Vector2 speed;
         KeyboardState keyboardState;
+        MouseState mousestate;
+        Screen screen;
+        enum Screen
+        {
+            intro,
+            ship,
 
+        }
 
         public Game1()
         {
@@ -34,14 +44,17 @@ namespace Final_project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            screen = Screen.intro;
+            screen = Screen.ship;
             base.Initialize();
             _graphics.PreferredBackBufferWidth = 1000; // Sets the width of the window to 800 pixels
 
             _graphics.PreferredBackBufferHeight = 800; // Sets the height of the window to 500 pixels
 
             _graphics.ApplyChanges(); // Applies the new dimensions
-            asteroid = new Rectangle(500,10,40,40);
+            asteroid = new Rectangle(500, 50, 100, 100);
+            asteroid2 = new Rectangle(200, 200, 100, 100);
+            asteroid3 = new Rectangle(700, 400, 100, 100);
             standard = new Rectangle(425, 300, 100, 100);
             astaroidspeed = new Vector2(0, 0);
             speed = new Vector2(0, 0);
@@ -56,14 +69,27 @@ namespace Final_project
             left = Content.Load<Texture2D>("fast-left");
             right = Content.Load<Texture2D>("fast-right");
             astaroid = Content.Load<Texture2D>("asteroid");
+            words = Content.Load<SpriteFont>("Words");
 
             // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
+            mousestate = Mouse.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (screen == Screen.intro)
+             {
+             if (mousestate.LeftButton == ButtonState.Pressed)
+             {
+                  screen = Screen.ship;
+             }
+                
+            }
+
+            if (screen == Screen.ship)
+            {
             keyboardState = Keyboard.GetState();
             speed.X = 0;
             speed.Y = 0;
@@ -85,7 +111,9 @@ namespace Final_project
             }
 
             standard.X += (int)speed.X;
-            standard.Y += (int)speed.Y;    
+            standard.Y += (int)speed.Y;
+            }
+           
 
             // TODO: Add your update logic here
 
@@ -111,6 +139,8 @@ namespace Final_project
             }
 
             _spriteBatch.Draw(astaroid,asteroid,Color.White);
+            _spriteBatch.Draw(astaroid, asteroid2, Color.White);
+            _spriteBatch.Draw(astaroid, asteroid3, Color.White);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 
