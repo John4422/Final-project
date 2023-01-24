@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:asteroid.png
 
+#begin End Theme.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:End Theme.png
+
 #begin fast-left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +61,7 @@
 /processorParam:TextureFormat=Color
 /build:fast-right.png
 
-#begin space.jfif
+#begin intro.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,7 +71,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:space.jfif
+/build:intro.png
+
+#begin Spaace.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Spaace.png
 
 #begin standerd.png
 /importer:TextureImporter
