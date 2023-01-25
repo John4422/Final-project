@@ -55,7 +55,7 @@ namespace Final_project
         {
             // TODO: Add your initialization logic here
             screen = Screen.intro;
-            screen = Screen.ship;
+            
             base.Initialize();
             _graphics.PreferredBackBufferWidth = 1000; // Sets the width of the window to 800 pixels
 
@@ -94,6 +94,7 @@ namespace Final_project
             mousestate = Mouse.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             if (screen == Screen.intro)
             {
                 if (mousestate.LeftButton == ButtonState.Pressed)
@@ -103,7 +104,7 @@ namespace Final_project
 
             }
 
-            if (screen == Screen.ship)
+            else if (screen == Screen.ship)
             {
                 keyboardState = Keyboard.GetState();
                 speed.X = 0;
@@ -133,59 +134,13 @@ namespace Final_project
                 {
                     speed.Y *= -1;
                 }
-            standard.X += (int)speed.X;
-            standard.Y += (int)speed.Y;
-
-                if (screen == Screen.ship)
-                {
-                    if (standard.Intersects(asteroid) || standard.Intersects(asteroid2) || standard.Intersects(asteroid3))
-                    {
-                        screen = Screen.end;
-                    }
-                }
-                asteroid.X += (int)astaroidspeed.X;
-                asteroid.Y += (int)astaroidspeed.Y;
-                asteroid2.X += (int)astaroidspeed.X;
-                asteroid2.Y += (int)astaroidspeed.Y;
-                asteroid3.X += (int)astaroidspeed.X;
-                asteroid3.Y += (int)astaroidspeed.Y;
-
-                if (asteroid.X < 0 || asteroid.X > _graphics.PreferredBackBufferWidth - asteroid.Width)
-                {
-                    astaroidspeed.X = -astaroidspeed.X;
-                }
-                if (asteroid.Y < 0 || asteroid.Y > _graphics.PreferredBackBufferHeight - asteroid.Height)
-                {
-                    astaroidspeed.Y = -astaroidspeed.Y;
-                }
-                if (asteroid2.X < 0 || asteroid2.X > _graphics.PreferredBackBufferWidth - asteroid2.Width)
-                {
-                    astaroidspeed.X = -astaroidspeed.X;
-                }
-                if (asteroid2.Y < 0 || asteroid2.Y > _graphics.PreferredBackBufferHeight - asteroid2.Height)
-                {
-                    astaroidspeed.Y = -astaroidspeed.Y;
-                }
-                if (asteroid3.X < 0 || asteroid3.X > _graphics.PreferredBackBufferWidth - asteroid3.Width)
-                {
-                    astaroidspeed.X = -astaroidspeed.X;
-                }
-                if (asteroid3.Y < 0 || asteroid3.Y > _graphics.PreferredBackBufferHeight - asteroid3.Height)
-                {
-                    astaroidspeed.Y = -astaroidspeed.Y;
-                }
-
                 standard.X += (int)speed.X;
                 standard.Y += (int)speed.Y;
-
-
 
                 if (standard.Intersects(asteroid) || standard.Intersects(asteroid2) || standard.Intersects(asteroid3))
                 {
                     screen = Screen.end;
                 }
-
-
 
                 if (asteroid.X < 0 || asteroid.Right > _graphics.PreferredBackBufferWidth)
                 {
@@ -231,50 +186,38 @@ namespace Final_project
             _spriteBatch.Begin();
 
             if (screen == Screen.intro)
+            {
+                _spriteBatch.Draw(introscr, introRect, Color.White);
+            }
 
-
-                if (screen == Screen.ship)
+            else if (screen == Screen.ship)
+            {
+                _spriteBatch.Draw(space, Space, Color.White);
+                if (speed.X > 0)
                 {
-                    _spriteBatch.Draw(space, Space, Color.White);
-                    if (speed.X > 0)
-                    {
-                        _spriteBatch.Draw(introscr, introRect, Color.White);
-                    }
-
-                    if (screen == Screen.ship)
-                    {
-                        _spriteBatch.Draw(space, Space, Color.White);
-                        if (speed.X > 0)
-                        {
-                            _spriteBatch.Draw(right, standard, Color.White);
-                        }
-                        else if (speed.X < 0)
-                        {
-                            _spriteBatch.Draw(left, standard, Color.White);
-                        }
-                        else
-                        {
-                            _spriteBatch.Draw(standerd, standard, Color.White);
-                        }
-
-                        _spriteBatch.Draw(astaroid, asteroid, Color.White);
-                        _spriteBatch.Draw(astaroid, asteroid2, Color.White);
-                        _spriteBatch.Draw(astaroid, asteroid3, Color.White);
-                        _spriteBatch.Draw(astaroid, asteroid, Color.White);
-                        _spriteBatch.Draw(astaroid, asteroid2, Color.White);
-                        _spriteBatch.Draw(astaroid, asteroid3, Color.White);
-                    }
-                    else if (screen == Screen.end)
-                    {
-                        _spriteBatch.Draw(end, endRect, Color.White);
-                    }
-
-
-                    _spriteBatch.End();
-                    // TODO: Add your drawing code here
-
-                    base.Draw(gameTime);
+                    _spriteBatch.Draw(right, standard, Color.White);
                 }
+                else if (speed.X < 0)
+                {
+                    _spriteBatch.Draw(left, standard, Color.White);
+                }
+                else
+                {
+                    _spriteBatch.Draw(standerd, standard, Color.White);
+                }
+
+                _spriteBatch.Draw(astaroid, asteroid, Color.White);
+                _spriteBatch.Draw(astaroid, asteroid2, Color.White);
+                _spriteBatch.Draw(astaroid, asteroid3, Color.White);
+            }
+            else if (screen == Screen.end)
+            {
+                _spriteBatch.Draw(end, endRect, Color.White);
+            }                  
+            _spriteBatch.End();
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
         }
     }
 }
